@@ -24,11 +24,9 @@ $doc->addScriptVersion('templates/' . $this->template . '/js/template.js');
 
 // Add Stylesheets
 $doc->addStyleSheetVersion('templates/' . $this->template . '/css/template' . ($this->direction == 'rtl' ? '-rtl' : '') . '.css');
-
-//~ $doc->addStyleSheetVersion('templates/' . $this->template . '/css/bootstrap.min.css');
-//~ 
-//~ 
-//~ $doc->addStyleSheetVersion('templates/' . $this->template . '/css/bootstrap.css');
+$doc->addStyleSheetVersion('templates/' . $this->template . '/css/sb-admin-2.css');
+$doc->addStyleSheetVersion('templates/' . $this->template . '/css/font-awesome-4.1.0/css/font-awesome.min.css');
+$doc->addStyleSheetVersion('templates/' . $this->template . '/css/bootstrap.min.css');
 
 // Load specific language related CSS
 $file = 'language/' . $lang->getTag() . '/' . $lang->getTag() . '.css';
@@ -87,17 +85,19 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 
 	<!-- Template color -->
 	<?php if ($this->params->get('templateColor')) : ?>
-		<style type="text/css">
-			.navbar-inner, .navbar-inverse .navbar-inner, .dropdown-menu .active > a, .dropdown-menu .active > a:hover, .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle, #status.status-top {
-				background: #f8f8f8;
-				border-color: #e7e7e7;;
-			}
-			
-			.navbar-inner, .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle {
-				-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1), inset 0 30px 10px rgba(0, 0, 0, .2);
-				-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1), inset 0 30px 10px rgba(0, 0, 0, .2);
-				box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1), inset 0 30px 10px rgba(0, 0, 0, .2);
-			}
+			<style type="text/css">
+	.navbar-inner, .navbar-inverse .navbar-inner, .dropdown-menu .active > a, .dropdown-menu .active > a:hover, .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle, #status.status-top
+	{
+		background: #f8f8f8;
+		border-color: #e7e7e7;;
+	}
+
+	.navbar-inner, .navbar-inverse .nav li.dropdown.open > .dropdown-toggle, .navbar-inverse .nav li.dropdown.active > .dropdown-toggle, .navbar-inverse .nav li.dropdown.open.active > .dropdown-toggle 
+	{
+		-moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1), inset 0 30px 10px rgba(0, 0, 0, .2);
+		-webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1), inset 0 30px 10px rgba(0, 0, 0, .2);
+		box-shadow: 0 1px 3px rgba(0, 0, 0, .25), inset 0 -1px 0 rgba(0, 0, 0, .1), inset 0 30px 10px rgba(0, 0, 0, .2);
+	}
 		</style>
 	<?php endif; ?>
 	<!-- Template header color -->
@@ -105,7 +105,7 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 		<style type="text/css">
 			.header {
 				background:#f8f8f8;
-				border-bottom: 1px solid lightgrey;
+				
 			}
 		</style>
 	<?php endif; ?>
@@ -138,7 +138,7 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 				</a>
 			<?php endif; ?>
 
-			<a class="admin-logo" href="<?php echo $this->baseurl; ?>">LimoAdmin</a>
+			<a class="admin-logo" href="<?php echo $this->baseurl; ?>">LMS</a>
 
 			<a class="brand hidden-desktop hidden-tablet" href="<?php echo JUri::root(); ?>" title="<?php echo JText::sprintf('TPL_ISIS_PREVIEW', $sitename); ?>" target="_blank"><?php echo JHtml::_('string.truncate', $sitename, 14, false, false); ?>
 				<span class="icon-out-2 small"></span></a>
@@ -178,13 +178,7 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 				
 				
 				
-				<span class="hidden-sm hidden-xs"><strong>Welcome, John Smith</strong></span>
-				<a href="#client.html" class="hidden-sm hidden-xs btn btn-sm btn-primary" style="margin-top: 1px;">
-					<i class="fa fa-plus"></i>&nbsp;Add Client
-				</a>
-				<a href="eventform.html" class="hidden-sm hidden-xs btn btn-sm btn-primary" style="margin-top: 1px;">
-					<i class="fa fa-plus"></i>&nbsp;Add Reservation
-				</a>
+				
 				
 				<a class="brand visible-desktop visible-tablet" href="<?php echo JUri::root(); ?>" title="<?php echo JText::sprintf('TPL_ISIS_PREVIEW', $sitename); ?>" target="_blank"><?php echo JHtml::_('string.truncate', $sitename, 14, false, false); ?>
 					<span class="icon-out-2 small"></span>
@@ -201,11 +195,26 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 <!-- Header -->
 <?php if ($displayHeader) : ?>
 	<header class="header">
-		<div class="container-logo">
-			
+		<div class="hidden-phone container-title topup_desk">
+			<div class="col-md-2 ">
+				<jdoc:include type="modules" name="title" />
+			</div>
+			<div class="col-md-10 allignment_menu">
+				<div>
+					<jdoc:include type="modules" name="toolbar" style="no" />
+				</div>
+			</div>
 		</div>
-		<div class="container-title">
-			<jdoc:include type="modules" name="title" />
+		<div class="hidden-desktop container-title topup">
+			<div class="col-md-2 ">
+				<jdoc:include type="modules" name="title" />
+			</div>
+			<div class="col-md-10 allignment_menu">
+				<div>
+					<jdoc:include type="modules" name="toolbar" style="no" />
+				</div>
+			</div>
+		</div>
 		</div>
 	</header>
 <?php endif; ?>
@@ -222,20 +231,7 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 <?php if (!$cpanel) : ?>
 	<!-- Subheader -->
 	
-	<div class="subhead-collapse">
-		<div class="subhead">
-			<div class="container-fluid">
-				<div id="container-collapse" class="container-collapse"></div>
-				<div class="row-fluid">
-					<div class="span12">
-						<div class="tool">
-						<jdoc:include type="modules" name="toolbar" style="no" />
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+	
 <?php else : ?>
 	
 <?php endif; ?>
@@ -279,18 +275,7 @@ $stickyToolbar = $this->params->get('stickyToolbar', '1');
 </div>
 <?php if (($statusFixed) && ($this->countModules('status'))) : ?>
 	<!-- Begin Status Module -->
-	<div id="status" class="navbar navbar-fixed-bottom hidden-phone">
-		<div class="btn-toolbar">
-			<div class="btn-group pull-right">
-				<p>
-					<jdoc:include type="modules" name="footer" style="no" />
-					&copy; <?php echo date('Y'); ?> <?php echo $sitename; ?>
-				</p>
-
-			</div>
-			<jdoc:include type="modules" name="status" style="no" />
-		</div>
-	</div>
+	
 	<!-- End Status Module -->
 <?php endif; ?>
 <jdoc:include type="modules" name="debug" style="none" />
